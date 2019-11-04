@@ -8,10 +8,11 @@ public class BinaryHeap {
 
     /**
      * add a priority to the queue, and swap if parent is greater than child
+     *
      * @param priority
      */
     public void add(int priority) {
-        if(size + 1 == data.length){
+        if (size + 1 == data.length) {
             grow_array();
         }
         data[size++] = priority;
@@ -26,7 +27,8 @@ public class BinaryHeap {
 
     /**
      * swap parent and child
-     * @param data - the queue
+     *
+     * @param data   - the queue
      * @param parent
      * @param child
      */
@@ -38,6 +40,7 @@ public class BinaryHeap {
 
     /**
      * pop the first item in the queue, and rearrange the queue so all parents are smaller than their children
+     *
      * @return the first item in the queue
      */
     public int remove() {
@@ -49,24 +52,34 @@ public class BinaryHeap {
 
     /**
      * iterate through the queue and swap parent and child if the child is smaller than parent
+     *
      * @param parent
      */
     private void siftDown(int parent) {
         int child = parent * 2 + 1; // left child
-        if (child < size && (child + 1) < size && data[child + 1] < data[child]) {
-            child = child + 1; // right child
+        if (child < size) {
+            if ((child + 1) < size && data[child + 1] < data[child]) {
+                child = child + 1; // right child
+                if (data[parent] > data[child]) {
+                    swap(data, child, parent);
+                    siftDown(child);
+                }
+            }
             if (data[parent] > data[child]) {
                 swap(data, child, parent);
                 siftDown(child);
             }
-        }else if(child < size && (child + 1) < size){
+            /*else if(child < size ){//&& (child + 1) < size){
             if (data[parent] > data[child]) {
                 swap(data, child, parent);
                 siftDown(child);
             }
+        }*/
         }
     }
-    private void grow_array(){
-        data  = Arrays.copyOfRange(data, 0, size * 2);
+
+    private void grow_array() {
+        data = Arrays.copyOfRange(data, 0, data.length * 2);
     }
 }
+
