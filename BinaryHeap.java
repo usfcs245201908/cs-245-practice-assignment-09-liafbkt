@@ -59,16 +59,13 @@ public class BinaryHeap {
         int child = parent * 2 + 1; // left child
         if (child < size) {
             if ((child + 1) < size && data[child + 1] < data[child]) {
-                child = child + 1; // right child
-                if (data[parent] > data[child]) {
-                    swap(data, child, parent);
-                    siftDown(child);
-                }
-            }
+                child = child + 1;
+            } // right child
             if (data[parent] > data[child]) {
                 swap(data, child, parent);
                 siftDown(child);
             }
+
             /*else if(child < size ){//&& (child + 1) < size){
             if (data[parent] > data[child]) {
                 swap(data, child, parent);
